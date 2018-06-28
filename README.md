@@ -1,4 +1,4 @@
-# Groovy Web Console
+# Groovy Web Console [![Build Status](https://travis-ci.org/gaborbata/groovy-web-console.svg)](https://travis-ci.org/gaborbata/groovy-web-console)
 
 Overview
 --------
