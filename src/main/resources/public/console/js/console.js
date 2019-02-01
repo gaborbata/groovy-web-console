@@ -50,7 +50,7 @@
   });
 
   $exampleSelector.on("change", function() {
-    selectedScript = $(this).val();
+    var selectedScript = $(this).val();
     if (selectedScript) {
       $.blockUI();
       $.ajax({
@@ -67,7 +67,7 @@
   });
 
   $("#permalink-button").on("click", function() {
-    var href = $location.attr('href').replace(/#.*/g, '');;
+    var href = $location.attr('href').replace(/#.*/g, '');
     resultEditor.getDoc().setValue(href + '#' + LZString.compressToEncodedURIComponent(inputEditor.getValue()));
   });
 
