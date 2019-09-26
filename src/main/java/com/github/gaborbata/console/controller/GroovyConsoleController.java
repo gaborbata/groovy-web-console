@@ -61,9 +61,9 @@ public class GroovyConsoleController implements ApplicationContextAware {
     @ResponseBody
     public CompletableFuture<ScriptResult> execute(@RequestParam String script) {
         return CompletableFuture.supplyAsync(() -> {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            GroovyShell groovyShell = createGroovyShell(out);
-            Object result = groovyShell.evaluate(script);
+            var out = new ByteArrayOutputStream();
+            var groovyShell = createGroovyShell(out);
+            var result = groovyShell.evaluate(script);
             return ScriptResult.create(result, out.toString());
         }).exceptionally(ScriptResult::create);
     }
@@ -74,23 +74,23 @@ public class GroovyConsoleController implements ApplicationContextAware {
     }
 
     private GroovyShell createGroovyShell(OutputStream outputStream) {
-        CompilerConfiguration configuration = createCompilerConfiguration();
-        Binding binding = createBinding(outputStream);
+        var configuration = createCompilerConfiguration();
+        var binding = createBinding(outputStream);
         return new GroovyShell(binding, configuration);
     }
 
     private Binding createBinding(OutputStream outputStream) {
-        Binding binding = new Binding();
+        var binding = new Binding();
         binding.setVariable("applicationContext", applicationContext);
         binding.setProperty("out", new PrintStream(outputStream, true));
         return binding;
     }
 
     private CompilerConfiguration createCompilerConfiguration() {
-        ASTTransformationCustomizer timedCustomizer = new ASTTransformationCustomizer(singletonMap("value", SCRIPT_TIMEOUT_IN_SECONDS), TimedInterrupt.class);
-        SecureASTCustomizer secureCustomizer = new SecureASTCustomizer();
+        var timedCustomizer = new ASTTransformationCustomizer(singletonMap("value", SCRIPT_TIMEOUT_IN_SECONDS), TimedInterrupt.class);
+        var secureCustomizer = new SecureASTCustomizer();
         secureCustomizer.setReceiversBlackList(RECEIVERS_BLACK_LIST);
-        CompilerConfiguration configuration = new CompilerConfiguration();
+        var configuration = new CompilerConfiguration();
         configuration.addCompilationCustomizers(secureCustomizer, timedCustomizer);
         return configuration;
     }
@@ -113,12 +113,12 @@ public class GroovyConsoleController implements ApplicationContextAware {
         }
 
         private static ScriptResult create(Throwable throwable) {
-            String message = throwable.getMessage() == null ? throwable.getClass().getName() : throwable.getMessage();
+            var message = throwable.getMessage() == null ? throwable.getClass().getName() : throwable.getMessage();
             return create(null, message);
         }
 
         private static ScriptResult create(Object result, String output) {
-            ScriptResult scriptletResult = new ScriptResult();
+            var scriptletResult = new ScriptResult();
             scriptletResult.result = result;
             if (StringUtils.hasLength(output)) {
                 scriptletResult.output = output.split(System.lineSeparator());
