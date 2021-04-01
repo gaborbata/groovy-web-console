@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <groovy.version>2.5.8</groovy.version>
+        <groovy.version>2.5.14</groovy.version>
         <jgiven.version>0.18.2</jgiven.version>
         <jacoco.version>0.8.4</jacoco.version>
     </properties>
