@@ -14,7 +14,7 @@ How to compile
 
 Usage
 -----
-Java 8 or later is required to start the application.
+Java 11 or later is required to start the application.
 
 * Start server: `mvnw spring-boot:run` or `java -jar target/groovy-web-console-1.0.0-SNAPSHOT.jar`
 * Access the console: `http://localhost:8080/console`
