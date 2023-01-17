@@ -13,17 +13,18 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.8.RELEASE</version>
+        <version>3.0.1</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
-        <groovy.version>2.5.14</groovy.version>
-        <jgiven.version>0.18.2</jgiven.version>
-        <jacoco.version>0.8.4</jacoco.version>
+        <java.version>17</java.version>
+        <groovy.version>4.0.7</groovy.version>
+        <jgiven.version>1.2.4</jgiven.version>
+        <jacoco.version>0.8.8</jacoco.version>
+        <spring.boot.version>3.0.1</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -31,10 +32,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
             <version>${groovy.version}</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
@@ -44,13 +47,13 @@
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-junit</artifactId>
+            <artifactId>jgiven-junit5</artifactId>
             <version>${jgiven.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-spring</artifactId>
+            <artifactId>jgiven-spring-junit5</artifactId>
             <version>${jgiven.version}</version>
             <scope>test</scope>
         </dependency>
@@ -73,7 +76,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
+                        <id>jacoco-report</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
@@ -87,6 +90,8 @@
                 <version>${jgiven.version}</version>
                 <executions>
                     <execution>
+                        <id>jgiven-report</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>

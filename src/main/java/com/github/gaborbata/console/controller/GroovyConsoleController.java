@@ -8,6 +8,7 @@ import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.control.customizers.ASTTransformationCustomizer;
 import org.codehaus.groovy.control.customizers.SecureASTCustomizer;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,7 @@ import static java.util.Collections.singletonMap;
  */
 @Controller
 @RequestMapping("/console")
+@ConditionalOnProperty(name = "groovy-web-console.enabled", havingValue = "true", matchIfMissing = true)
 public class GroovyConsoleController implements ApplicationContextAware {
 
     private static final long SCRIPT_TIMEOUT_IN_SECONDS = 5;

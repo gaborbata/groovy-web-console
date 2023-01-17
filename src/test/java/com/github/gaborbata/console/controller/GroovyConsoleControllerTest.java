@@ -2,18 +2,16 @@ package com.github.gaborbata.console.controller;
 
 import com.github.gaborbata.console.configuration.JGivenConfig;
 import com.github.gaborbata.console.controller.stage.GroovyConsoleControllerStage;
-import com.tngtech.jgiven.annotation.JGivenConfiguration;
-import com.tngtech.jgiven.integration.spring.SimpleSpringScenarioTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.tngtech.jgiven.integration.spring.junit5.SimpleSpringScenarioTest;
+import com.tngtech.jgiven.junit5.JGivenExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.NONE)
-@JGivenConfiguration(JGivenConfig.class)
+@ExtendWith(JGivenExtension.class)
+@SpringBootTest(classes = {JGivenConfig.class}, webEnvironment = WebEnvironment.NONE)
 public class GroovyConsoleControllerTest extends SimpleSpringScenarioTest<GroovyConsoleControllerStage> {
 
     private static final String GROOVY_CONSOLE_ENDPOINT = "/console/groovy";
